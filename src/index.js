@@ -1,32 +1,22 @@
 const express = require('express');
-const cors = require ('cors');
+const cors = require('cors');
+const bodyParser = require("body-parser");
 var app = express();
-app.use(cors({origin: '*'}));
+app.use(cors({ origin: '*' }));
+app.use(bodyParser.json());
 const port = 3001;
 
-let someValues = [20.1, 23.3, 11.2];
-
-let myData =[{"Label": "14.30", "Value":12}, {"Label": "14.45", "Value":13}];
-console.log(JSON.stringify(myData));
-
-const test = '[{"label":"14.00","value":12}, {"label":"14.30","value":13}]';
-let newTest = JSON.parse(test);
-console.log(newTest);
+let myData = [];
 
 app.get('/', (req, res) => {
-    return res.send(myData);
+    return res.send(myData.slice(-150));
 })
 
-app.post('/', (req, res)=>{
+app.post('/', (req, res) => {
     var payload = req.body;
-    console.log(payload);
-       myData = myData.concat(payload);
+    myData = myData.concat(payload);
     res.send("all good");
 
-})
-
-app.get('/test', (req, res) => {
-    return res.send('{Hello World!}');
 })
 
 
