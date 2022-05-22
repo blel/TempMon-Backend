@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 const port = 3001;
 
 let myData = [];
+myData.concat("Hello World");
 
 app.get('/', (req, res) => {
     return res.send(myData.slice(-150));
